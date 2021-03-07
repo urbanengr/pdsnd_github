@@ -270,15 +270,23 @@ def raw_data(sel_city, df_f_data):
 
     req_in = 'yes'
     i = 0
-    while req_in != 'no':
-        req_in = input("Do you want raw trip data? Enter yes or no ('no' will exit program).").lower()
+    end = i + 5
 
-        while req_in != 'no':
-            if req_in == 'yes':
-                print(f"Raw Trip for city of {sel_city}")
-                print(df_f_data[i:i+5])
-                i = i+5
-                req_in = input("Want more data? ('yes' or 'no')").lower()
+    req_in = input("Do you want raw trip data? Enter 'yes' or 'no' "
+                   "('no' will exit program).: ").lower()
+
+    while (i <= len(df_f_data)) and (req_in != 'no'):
+        print(f"\nRaw Trip for city of {sel_city}")
+        print(f"Total no. of records = {len(df_f_data)}\n")
+        print(df_f_data[i:end])
+
+        if (i >= len(df_f_data)) or (end >= len(df_f_data)):
+            print("\n--- End of data.")
+            break
+        elif end < len(df_f_data):
+            req_in = input("Want more data? ('yes' or 'no'): ").lower()
+            i += 5
+            end += 5
         else:
             req_in = 'no'
 
