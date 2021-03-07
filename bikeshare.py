@@ -137,7 +137,6 @@ def date_sel(city_data, month_in, weekday):
     month = months.get(month_in)
     wday = weekdays.get(weekday)
 
-
     for i in range(len(df_c_d)):
         if df_c_d.month[i] == month and weekday == 'none':
             df_f_data.loc[i] = (df_c_data.iloc[i])
@@ -212,12 +211,12 @@ def trip_duration_stats(sel_city, month_in, wday, df_f_data):
     day_name = dayofweek.index[wday]
     print(f"\n--- Travel times in {sel_city} for month {month_in} on {day_name} --- \n")
 
-    #--- display total travel time
+    # --- display total travel time
     min_con = ((df_f_data['Trip Duration'].sum()) / 60)
 
     print(f"\nTotal travel time is {min_con} minutes")
 
-    #--- display mean travel time
+    # --- display mean travel time
     avg_trip_con = df_f_data['Trip Duration']
     avg_con = avg_trip_con.mean()/60
     print(f"\nAverage travel time is {avg_con} minutes")
