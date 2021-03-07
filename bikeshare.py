@@ -28,7 +28,9 @@ def select_city():
     while sel_city != 'quit':
         sel_city = input("\nWhat city? Enter chicago or CHI, new york city or NYC, "
                          "washington dc or DC, or quit): ").lower()
-        if sel_city not in city_choice:
+        if sel_city == 'quit':
+            break
+        elif sel_city not in city_choice:
             print("Incorrect selection, please try again."
                   "\nIf you would like to quit program, type 'quit'")
         else:
@@ -55,24 +57,23 @@ def date_filters():
     # --- filter input and error checking loop
     while city_date != 'quit':
         city_date = input(
-            "Do you want to filter by month (enter 'm'),\n day of the week (enter 'd'),"
-            "\n both month and day of the week (enter 'b')\n or none (enter 'n')?: ").lower()
+            "Do you want to filter by month (enter 'm'), day of the week (enter 'd'),"
+            "\n both month and day of the week (enter 'b') or none (enter 'n')?: ").lower()
 
         if city_date not in date_filter:
-            print("\nIncorrect selection, please try again.\nIf you would like to quit program, type 'quit'")
+            print("\nIncorrect selection, please try again.\n")
             continue
         else:
-            print("You are filtering by:", city_date)
+            print("\nYou are filtering by:", city_date)
 
     # --- Month only filter
         if city_date in ('m', 'month'):
-            month_in = input("Which month? Enter using one of the following abbreviations"
+            month_in = input("\nWhich month? Enter using one of the following abbreviations"
                              " - jan, feb, mar, apr, may, jun: ").lower()
 
             if month_in not in months:
                 print(
-                    "\nIncorrect selection, please check spelling and try again."
-                    "\nIf you would like to quit program, type 'quit'")
+                    "\nIncorrect selection, please check spelling and try again.")
                 continue
             else:
                 print("Selected month is: ", month_in)
@@ -82,12 +83,11 @@ def date_filters():
 
     # --- Weekday only filter
         elif city_date in ('d', 'day'):
-            weekday = input("What day of the week are you interested in? Enter: sun, mon, tue, wed, thu, fri, sat: ")
+            weekday = input("\nWhat day of the week are you interested in? Enter: sun, mon, tue, wed, thu, fri, sat: ")
 
             if weekday not in weekdays:
                 print(
-                    "\nIncorrect selection, please check spelling and try again."
-                    "\nIf you would like to quit program, type 'quit'")
+                    "\nIncorrect selection, please check spelling and try again.")
                 continue
             else:
                 print("Selected day of week is: ", weekday)
@@ -98,13 +98,13 @@ def date_filters():
     # --- Month and weekday filter
         elif city_date in ('b', 'both'):
             month_in = input(
-                "Which month? Enter using one of the following abbreviations - jan, feb, mar, apr, may, jun: ").lower()
+                "\nWhich month? Enter using one of the following abbreviations - jan, feb, mar, apr, may, jun: ").lower()
             weekday = input(
                 "What day of the week are you interested in?"
                 "\n Enter one the 3-letter abbreviations: sun, mon, tue, wed, thu, fri, or sat: ").lower()
 
             if (month_in not in months) or (weekday not in weekdays):
-                print("\nIncorrect selection, please try again.\nIf you would like to quit program, type 'quit'")
+                print("\nIncorrect selection, please try again.\n")
                 continue
             else:
                 print("Selected month is: ", month_in)
@@ -269,15 +269,23 @@ def raw_data(sel_city, df_f_data):
 
     req_in = 'yes'
     i = 0
-    while req_in != 'no':
-        req_in = input("Do you want raw trip data? Enter yes or no ('no' will exit program).").lower()
+    end = i + 5
 
-        while req_in != 'no':
-            if req_in == 'yes':
-                print(f"Raw Trip for city of {sel_city}")
-                print(df_f_data[i:i+5])
-                i = i+5
-                req_in = input("Want more data? ('yes' or 'no')").lower()
+    req_in = input("Do you want raw trip data? Enter 'yes' or 'no' "
+                   "('no' will exit program).: ").lower()
+
+    while (i <= len(df_f_data)) and (req_in != 'no'):
+        print(f"\nRaw Trip for city of {sel_city}")
+        print(f"Total no. of records = {len(df_f_data)}\n")
+        print(df_f_data[i:end])
+
+        if (i >= len(df_f_data)) or (end >= len(df_f_data)):
+            print("\n--- End of data.")
+            break
+        elif end < len(df_f_data):
+            req_in = input("Want more data? ('yes' or 'no'): ").lower()
+            i += 5
+            end += 5
         else:
             req_in = 'no'
 
@@ -285,6 +293,12 @@ def raw_data(sel_city, df_f_data):
 def main():
     while True:
         city_data, sel_city = select_city()
+        if sel_city == 'quit':
+            restart = input("\nWould you like to restart? Enter 'yes'' or 'no'.\n")
+            if restart.lower() != 'yes':
+                break
+            else:
+                continue
         month_in, weekday = date_filters()
         df_f_data, wday = date_sel(city_data, month_in, weekday)
         time_stats(df_f_data)
