@@ -21,3 +21,19 @@ City data: chicago.csv, washington.csv, new_york_city.csv
 
 ### Credits
 Forked repo: udacity/pdsnd_github
+
+### References
+Reference materials used for the Bikeshare project:
+
+Books
+> Python Crash Course by Eric Matthes
+> Automate the Boring Stuff with Python by Al Sweigart
+
+Websites
+> StackOverflow
+> GeeksforGeeks
+> W3 School
+
+YouTube Videos
+> Pandas for Your Grandpa
+> Numpy for Your Grandma
