@@ -28,7 +28,9 @@ def select_city():
     while sel_city != 'quit':
         sel_city = input("\nWhat city? Enter chicago or CHI, new york city or NYC, "
                          "washington dc or DC, or quit): ").lower()
-        if sel_city not in city_choice:
+        if sel_city == 'quit':
+            break
+        elif sel_city not in city_choice:
             print("Incorrect selection, please try again."
                   "\nIf you would like to quit program, type 'quit'")
         else:
@@ -284,6 +286,12 @@ def raw_data(sel_city, df_f_data):
 def main():
     while True:
         city_data, sel_city = select_city()
+        if sel_city == 'quit':
+            restart = input("\nWould you like to restart? Enter 'yes'' or 'no'.\n")
+            if restart.lower() != 'yes':
+                break
+            else:
+                continue
         month_in, weekday = date_filters()
         df_f_data, wday = date_sel(city_data, month_in, weekday)
         time_stats(df_f_data)
