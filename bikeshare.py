@@ -55,24 +55,23 @@ def date_filters():
     # --- filter input and error checking loop
     while city_date != 'quit':
         city_date = input(
-            "Do you want to filter by month (enter 'm'),\n day of the week (enter 'd'),"
-            "\n both month and day of the week (enter 'b')\n or none (enter 'n')?: ").lower()
+            "Do you want to filter by month (enter 'm'), day of the week (enter 'd'),"
+            "\n both month and day of the week (enter 'b') or none (enter 'n')?: ").lower()
 
         if city_date not in date_filter:
-            print("\nIncorrect selection, please try again.\nIf you would like to quit program, type 'quit'")
+            print("\nIncorrect selection, please try again.\n")
             continue
         else:
-            print("You are filtering by:", city_date)
+            print("\nYou are filtering by:", city_date)
 
     # --- Month only filter
         if city_date in ('m', 'month'):
-            month_in = input("Which month? Enter using one of the following abbreviations"
+            month_in = input("\nWhich month? Enter using one of the following abbreviations"
                              " - jan, feb, mar, apr, may, jun: ").lower()
 
             if month_in not in months:
                 print(
-                    "\nIncorrect selection, please check spelling and try again."
-                    "\nIf you would like to quit program, type 'quit'")
+                    "\nIncorrect selection, please check spelling and try again.")
                 continue
             else:
                 print("Selected month is: ", month_in)
@@ -82,12 +81,11 @@ def date_filters():
 
     # --- Weekday only filter
         elif city_date in ('d', 'day'):
-            weekday = input("What day of the week are you interested in? Enter: sun, mon, tue, wed, thu, fri, sat: ")
+            weekday = input("\nWhat day of the week are you interested in? Enter: sun, mon, tue, wed, thu, fri, sat: ")
 
             if weekday not in weekdays:
                 print(
-                    "\nIncorrect selection, please check spelling and try again."
-                    "\nIf you would like to quit program, type 'quit'")
+                    "\nIncorrect selection, please check spelling and try again.")
                 continue
             else:
                 print("Selected day of week is: ", weekday)
@@ -98,13 +96,13 @@ def date_filters():
     # --- Month and weekday filter
         elif city_date in ('b', 'both'):
             month_in = input(
-                "Which month? Enter using one of the following abbreviations - jan, feb, mar, apr, may, jun: ").lower()
+                "\nWhich month? Enter using one of the following abbreviations - jan, feb, mar, apr, may, jun: ").lower()
             weekday = input(
                 "What day of the week are you interested in?"
                 "\n Enter one the 3-letter abbreviations: sun, mon, tue, wed, thu, fri, or sat: ").lower()
 
             if (month_in not in months) or (weekday not in weekdays):
-                print("\nIncorrect selection, please try again.\nIf you would like to quit program, type 'quit'")
+                print("\nIncorrect selection, please try again.\n")
                 continue
             else:
                 print("Selected month is: ", month_in)
