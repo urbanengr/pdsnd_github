@@ -1,17 +1,23 @@
->**Note**: Please **fork** the current Udacity repository so that you will have a **remote** repository in **your** Github account. Clone the remote repository to your local machine. Later, as a part of the project "Post your Work on Github", you will push your proposed changes to the remote repository in your Github account.
+Bikeshare github project
+
+### Nanodegree
+Programming for Data Science with Python
 
 ### Date created
-Include the date you created this project and README file.
+Project and files created: Sunday March 7, 2021
+
+### Software version
+Python v3.8
 
 ### Project Title
-Replace the Project Title
+bikeshare data
 
 ### Description
-Describe what your project is about and what it does
+The bikeshare data program is a python program that extracts trip and user data from one of three cities (new york city, washington dc, or chicago).
 
 ### Files used
-Include the files used
+City data: chicago.csv, washington.csv, new_york_city.csv
+
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
-
+Forked repo: udacity/pdsnd_github
